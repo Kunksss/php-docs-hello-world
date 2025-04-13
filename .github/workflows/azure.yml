@@ -1,0 +1,22 @@
+name: Build and deploy PHP app to Azure Web App - RedesFinal
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v2
+
+      - name: Deploy para Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: RedesFinal
+          slot-name: production
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          package: .
